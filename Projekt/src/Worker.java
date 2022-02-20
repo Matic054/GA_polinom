@@ -51,7 +51,7 @@ public class Worker extends Thread
 		for (int i = 0; i < pop.length/2; i++)
 		{
 			int ind = 0;
-			for (int j = i; j < rez.length; j++)
+			for (int j = 0; j < rez.length; j++)
 			if (razlike[ind] > razlike[j])
 					ind = j;
 				

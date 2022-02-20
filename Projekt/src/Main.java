@@ -1,4 +1,3 @@
-
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Random;
@@ -43,10 +42,9 @@ public class Main
 		for (int i = 0; i < iter; i++)
 		{
 			sel(pop);
-		//	get(pop);
 			cros(pop);
 			mut(pop);
-			
+			System.gc();
 	     	if (razlika(pop[0]) < razlika(best) - 100)
 			{
 				System.out.println(razlika(pop[0]));
@@ -57,7 +55,7 @@ public class Main
 					Graphics g = p2.getGraphics();
 					p2.paint(g);
 					try {
-						Thread.sleep(500);
+						Thread.sleep(300);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -113,7 +111,7 @@ public class Main
 		for (int i = 0; i < pop.length/2; i++)
 		{
 			int ind = 0;
-			for (int j = i; j < rez.length; j++)
+			for (int j = 0; j < rez.length; j++)
 			if (razlike[ind] > razlike[j])
 					ind = j;
 				
@@ -153,12 +151,5 @@ public class Main
 							pop[i].k[j] = r.nextFloat();
 						else pop[i].k[j] = -r.nextFloat();
 	}
-	
-	static void get(Polinom[] pop)
-	{
-		float[] k = pop[0].k.clone();
-		pop = pop(pop.length);
-		pop[0].k = k;
-	}
-	
+		
 }
