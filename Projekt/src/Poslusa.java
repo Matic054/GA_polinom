@@ -6,6 +6,7 @@ public class Poslusa implements MouseMotionListener{
 	
 	@Override
 	public void mouseDragged(MouseEvent e) {
+		if (!Main.GUI)
 		if (dovoljeno)
 		{
 			Panel.x.add(e.getX());

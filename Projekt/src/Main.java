@@ -1,11 +1,17 @@
-import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.*;
 import java.util.Random;
+
+import javax.swing.BorderFactory;
+import javax.swing.GroupLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.border.Border;
 
 public class Main 
 {
+	static JFrame frame;
 	static Panel p1,p2;
+	static JButton itr, par, por, evo;
 	static Random r = new Random();
 	
 	static int[][] cilj;
@@ -13,24 +19,62 @@ public class Main
 	
 	static int vel;
 	static int threads;
+	static boolean iterativno = false;
+	static boolean porazdeljeno = false;
 	static boolean paralelno = false;
-	static boolean evolution = true;
+	static boolean evolution = false;
+	static boolean GUI = true;
 	
 	public static void main(String[] args)
 	{
-		JFrame frame = new JFrame();
+		frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
-		frame.setBackground(Color.WHITE);
 		frame.setSize(1000,800);
 		
-		p2 = new Panel();
-		frame.add(p2);
+		p1 = new Panel(true);
+		frame.add(p1);
 		frame.pack();
+		frame.setBackground(new Color(164,219,232));
+		p1.setLayout(new GroupLayout(p1));
+		
+		evo = new JButton("Iter-Evolucija");
+		itr = new JButton("Iterativno");
+		par = new JButton("Paralelno");
+		por = new JButton("Porazdeljeno");
+		evo.setBackground(Color.white);
+		evo.setBorder(BorderFactory.createLineBorder(Color.black));
+		evo.setBounds(505, 300, 200, 100);
+		itr.setBackground(Color.white);
+		itr.setBorder(BorderFactory.createLineBorder(Color.black));
+		itr.setBounds(295, 300, 200, 100);
+		por.setBackground(Color.white);
+		por.setBorder(BorderFactory.createLineBorder(Color.black));
+		por.setBounds(400, 620, 200, 100);
+		par.setBackground(Color.white);
+		par.setBorder(BorderFactory.createLineBorder(Color.black));
+		par.setBounds(400, 460, 200, 100);
+		Akcija a = new Akcija();
+		evo.addActionListener(a);
+		itr.addActionListener(a);
+		por.addActionListener(a);
+		par.addActionListener(a);
+		p1.add(itr);
+		p1.add(par);
+		p1.add(por);
+		p1.add(evo);
+	
 		Poslusa po = new Poslusa();
 		Miska m = new Miska();
 		frame.addMouseMotionListener(po);
 		frame.addMouseListener(m);
+	}
+	
+	static void MakePanel2()
+	{
+		p2 = new Panel(false);
+		frame.add(p2);
+		frame.pack();
 	}
 	
 	static void GA(int iter)
@@ -55,7 +99,7 @@ public class Main
 					Graphics g = p2.getGraphics();
 					p2.paint(g);
 					try {
-						Thread.sleep(300);
+						Thread.sleep(400);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
